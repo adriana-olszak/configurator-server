@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "removeComments": true,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019"],
+    "target": "es2017",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "incremental": true,
+    "paths": {
+      "@app/*": ["./src/*"]
+    },
+    "resolveJsonModule": true,
+    "noUnusedLocals": false,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+  }
+}
