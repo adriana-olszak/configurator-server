@@ -44,14 +44,6 @@ export class UserRepository extends Repository implements IUserRepo {
       where: {
         email: userEmail instanceof UserEmail ? userEmail.value : userEmail,
       },
-      include: {
-        mentor: {
-          select: { id: true },
-        },
-        student: {
-          select: { id: true },
-        },
-      },
     });
     if (!user) throw new Error('User not found.');
 

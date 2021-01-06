@@ -5,13 +5,9 @@ import { UserSurname } from '@app/modules/user/domain/model/user-surname';
 import { UserName } from '@app/modules/user/domain/model/user-name';
 import { UserPassword } from '@app/modules/user/domain/model/user-password';
 import { UserEmail } from '@app/modules/user/domain/model/user-email';
-import { User as UserEntity, UserGetPayload } from '@prisma/client';
+import { User as UserEntity } from '@prisma/client';
 import { Mapper } from '@app/shared/infra/Mapper';
 import { UserDto } from '@app/modules/user/serializers/user.serializer';
-
-type UserWithStudentAndMentor = UserGetPayload<{
-  include: { student: true; mentor: true };
-}>;
 
 @Injectable()
 export class UserMap implements Mapper<User, UserEntity> {
@@ -24,12 +20,10 @@ export class UserMap implements Mapper<User, UserEntity> {
       access: user.access,
       isDeleted: user.isDeleted,
       email: user.email.value,
-      mentorId: user.mentorId,
-      studentId: user.studentId,
     };
   }
   public static fromPersistence(
-    raw: UserWithStudentAndMentor | UserEntity
+    raw: UserEntity
   ): User {
     const userNameOrError = UserName.create({ name: raw.name });
     const userSurnameOrError = UserSurname.create({ surname: raw.surname });
@@ -51,8 +45,6 @@ export class UserMap implements Mapper<User, UserEntity> {
         refreshToken: raw.refreshToken || undefined,
         isEmailVerified: raw.isEmailVerified,
         lastLogin: raw.lastLogin || undefined,
-        studentId: (raw as UserWithStudentAndMentor)?.student?.id,
-        mentorId: (raw as UserWithStudentAndMentor)?.mentor?.id,
       },
       new UniqueEntityID(raw.id)
     );

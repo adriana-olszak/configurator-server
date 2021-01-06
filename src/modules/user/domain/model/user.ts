@@ -12,8 +12,8 @@ import UserDeletedEvent from '@app/modules/user/events/implements/user-deleted.e
 import UserCreatedEvent from '@app/modules/user/events/implements/user-created.event';
 
 export enum USER_ACCESS {
-  MENTOR = 'MENTOR',
-  STUDENT = 'STUDENT',
+  ADMIN = 'ADMIN',
+  USER = 'USER',
 }
 
 interface UserProps {
@@ -27,21 +27,11 @@ interface UserProps {
   refreshToken?: RefreshToken;
   lastLogin?: Date | undefined;
   isEmailVerified?: boolean;
-  mentorId?: string ;
-  studentId?: string ;
 }
 
 export class User extends AggregateRoot<UserProps> {
   get id(): UserId {
     return UserId.create(this._id).getValue();
-  }
-
-  get mentorId(): string | undefined {
-    return this.props.mentorId;
-  }
-
-  get studentId(): string | undefined {
-    return this.props.studentId;
   }
 
   get email(): UserEmail {

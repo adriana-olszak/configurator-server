@@ -6,7 +6,6 @@ import { PrismaModule } from './shared/infra/database/prisma.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { RedisModule } from '@app/modules/redis/redis.module';
-import { TeachingModule } from './modules/teaching/teaching.module';
 
 @Module({
   imports: [
@@ -14,7 +13,6 @@ import { TeachingModule } from './modules/teaching/teaching.module';
     UserModule,
     TerminusModule,
     PrismaModule,
-    TeachingModule,
     RedisModule,
   ],
   controllers: [],
