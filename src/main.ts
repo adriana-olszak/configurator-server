@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+  const port = process.env.PORT || 3333;
 
   // run only on dev envs
   if (process.env.APP_ENV !== 'production') {
@@ -15,11 +16,11 @@ async function bootstrap() {
       .setTitle('Meskaria API')
       .setDescription('Meskaria API documentation')
       .setVersion('0.1')
-      .addServer('http://localhost:3333/api')
+      .addServer(`http://localhost:${port}/api`)
       .addTag('User')
       .addTag('TimeSlots')
       .addTag('Offer')
-      .setBasePath('http://localhost:3333/api')
+      .setBasePath(`http://localhost:${port}/api`)
       .addBearerAuth({ name: 'Authorization', in: 'header', type: 'apiKey' })
       .build();
 
@@ -30,7 +31,6 @@ async function bootstrap() {
     SwaggerModule.setup(`/explore`, app, document);
   }
 
-  const port = process.env.PORT || 3333;
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
