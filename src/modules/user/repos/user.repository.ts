@@ -19,7 +19,7 @@ export class UserRepository extends Repository implements IUserRepo {
   }
 
   async exists(userEmail: UserEmail): Promise<boolean> {
-    const user = await this.prisma.user.findOne({
+    const user = await this.prisma.user.findUnique({
       where: {
         email: userEmail.value,
       },
@@ -29,7 +29,7 @@ export class UserRepository extends Repository implements IUserRepo {
   }
 
   async getUserByUserId(userId: string): Promise<User> {
-    const user = await this.prisma.user.findOne({
+    const user = await this.prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -40,7 +40,7 @@ export class UserRepository extends Repository implements IUserRepo {
   }
 
   async getUserByEmail(userEmail: UserEmail | string): Promise<User> {
-    const user = await this.prisma.user.findOne({
+    const user = await this.prisma.user.findUnique({
       where: {
         email: userEmail instanceof UserEmail ? userEmail.value : userEmail,
       },

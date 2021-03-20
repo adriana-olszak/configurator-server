@@ -11,7 +11,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${PORT}:${PORT}
-      - 9229:9229
+      - 9229:9229 # debugger
     command: >
       bash -c "npm run prisma:migrate
       && npm run start:dev"

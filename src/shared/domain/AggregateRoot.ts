@@ -28,9 +28,9 @@ export abstract class AggregateRoot<T> extends AggregateRootNest {
     const domainEventClass = Reflect.getPrototypeOf(domainEvent);
     console.info(
       `[Domain Event Created]:`,
-      thisClass.constructor.name,
+      thisClass?.constructor.name,
       '==>',
-      domainEventClass.constructor.name
+      domainEventClass?.constructor.name,
     );
   }
   private logDomainEventsCommitted(): void {
@@ -39,14 +39,14 @@ export abstract class AggregateRoot<T> extends AggregateRootNest {
 
     const domainEventClass = uncommitted
       .map(
-        (domainEvent) => Reflect.getPrototypeOf(domainEvent).constructor.name
+        (domainEvent) => Reflect.getPrototypeOf(domainEvent)?.constructor.name,
       )
       .join(',');
     console.info(
       `[Domain Event Committed]:`,
-      thisClass.constructor.name,
+      thisClass?.constructor.name,
       '==>',
-      domainEventClass
+      domainEventClass,
     );
   }
 }
